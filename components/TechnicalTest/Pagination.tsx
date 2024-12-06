@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 interface Product {
   name: string;
   price: number;
+  description: string;
 }
 
 interface PaginationProps {
@@ -61,15 +62,23 @@ export default function Pagination({ products }: PaginationProps) {
     return (
         <div className="h-full w-full">
             <h1 className='text-3xl font-bold text-black'>Lista de Productos</h1> 
-            <div className="w-full min-w-[] flex flex-wrap items-center justify-start h-full gap-4 p-10">
+            <div className="w-full min-w-[] flex flex-wrap items-start justify-start h-full gap-4 p-10">
                 {paginatedProducts.map((producto: Product, index: number) => (
-                <div className="card p-4 bg-gray-200 border rounded" key={index}>
-                    <div className="card-body">
-                        <h5 className="card-title">{producto.name}</h5>
-                        <p>${producto.price}</p>
-                    </div>
+                <div
+                className="card w-full sm:w-[300px] md:w-[350px] lg:w-[350px] max-w-[400px] bg-gray-200 border border-gray-300 rounded-lg shadow-md hover:shadow-lg transition-shadow p-4 h-auto max-h-[500px] overflow-hidden"
+                key={index}
+                >
+                <div className="card-body space-y-2">
+                    <h5 className="card-title text-lg font-semibold text-gray-800">
+                        {producto.name}
+                    </h5>
+                    <p className="text-sm text-gray-600 line-clamp-3">
+                        {producto.description}
+                    </p>
+                    <p className="text-base font-bold text-gray-900">${producto.price}</p>
                 </div>
-                ))}
+            </div>
+            ))}
             </div>
             {/* Controles de navegación */}
             <div className="flex justify-center items-center gap-10">
